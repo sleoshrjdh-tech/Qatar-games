@@ -6,66 +6,73 @@
 <title>Qatar Games</title>
 
 <style>
-body {
-  font-family: Arial;
-  background:#121212;
-  color:white;
-  margin:0;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
+body { 
+  font-family: Arial; 
+  background:#121212; 
+  color:white; 
+  margin:0; 
+  display:flex; 
+  flex-direction:column; 
+  min-height:100vh; 
 }
-body.landscape {
-  transform: rotate(-90deg) scale(0.7);
-  transform-origin: left top;
+body.landscape { 
+  transform: rotate(-90deg) scale(0.7); 
+  transform-origin: left top; 
 }
 #container { display:flex; flex:1; }
-#sidebar {
-  width:200px;
-  background:#000;
-  padding:10px;
+#sidebar { 
+  width:200px; 
+  background:#000; 
+  color:white; 
+  padding:10px; 
+  height:100vh; 
+  box-sizing:border-box; 
 }
-#sidebar button {
-  width:100%;
-  margin:5px 0;
-  padding:10px;
-  background:#111;
-  color:white;
-  border:none;
+#sidebar button { 
+  width:100%; 
+  margin:5px 0; 
+  padding:10px; 
+  background:#111; 
+  color:white; 
+  border:none; 
+  cursor:pointer; 
 }
 #sidebar button:hover { background:#333; }
 #main { flex:1; padding:10px; overflow-y:auto; }
-.section {
-  margin-bottom:20px;
-  background:#1e1e1e;
-  padding:10px;
-  border-radius:5px;
-  display:none;
+.section { 
+  margin-bottom:20px; 
+  background:#1e1e1e; 
+  padding:10px; 
+  border-radius:5px; 
+  display:none; 
 }
-.friends-circle {
-  display:flex;
-  overflow-x:auto;
-  margin-bottom:10px;
+.friends-circle { display:flex; overflow-x:auto; margin-bottom:10px; }
+.friend { 
+  width:60px; 
+  height:60px; 
+  border-radius:50%; 
+  background:#444; 
+  margin-right:10px; 
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+  font-size:12px; 
 }
-.friend {
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:#444;
-  margin-right:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:12px;
+h3 { margin:5px 0; }
+footer { 
+  text-align:center; 
+  padding:10px; 
+  background:#111; 
+  color:#888; 
+  font-size:12px; 
 }
-footer {
+.warning {
+  margin-top:10px;
+  color:#ff5555;
+  font-weight:bold;
+  font-size:14px;
   text-align:center;
-  padding:10px;
-  background:#111;
-  color:#888;
-  font-size:12px;
 }
-button { cursor:pointer; }
 </style>
 </head>
 
@@ -73,69 +80,115 @@ button { cursor:pointer; }
 
 <div id="container">
 
+<!-- Sidebar -->
 <div id="sidebar">
-  <h2>Menu</h2>
-  <button data-section="startSection">Start</button>
-  <button data-section="gamesSection">Games</button>
-  <button data-section="chatSection">Chat</button>
-  <button data-section="videosSection">Videos</button>
-  <button data-section="livestreamsSection">Livestreams</button>
-  <button data-section="avatarSection">Avatar</button>
-  <button data-section="qrSection">QR</button>
-  <button data-section="settingsSection">Settings</button>
-  <button data-section="supportSection">Support</button>
+<h2>Menu</h2>
+<button data-section="startSection">Start</button>
+<button data-section="gamesSection">Games</button>
+<button data-section="chatSection">Chat</button>
+<button data-section="videosSection">Videos</button>
+<button data-section="livestreamsSection">Livestreams</button>
+<button data-section="avatarSection">Avatar</button>
+<button data-section="createSection">Create</button>
+<button data-section="tradeSection">Trade</button>
+<button data-section="qrSection">QR</button>
+<button data-section="premiumSection">Premium</button>
+<button data-section="settingsSection">Settings</button>
+<button data-section="supportSection">Support</button>
 </div>
 
+<!-- Main -->
 <div id="main">
 <div id="sectionContent">
 
+<!-- Start Section -->
 <div class="section" id="startSection" style="display:block;text-align:center;">
   <h1 id="startTitle">Welcome to Qatari Games</h1>
-  <p id="randomQuote"></p>
+  <p id="randomQuote" style="font-style:italic;"></p>
+
+  <!-- WARNING MESSAGE -->
+  <p class="warning">
+    THIS IS NOT AN ONLINE APP.<br>
+    THIS APP IS BEING CREATED.<br>
+    GAMES, VIDEOS, AND LIVESTREAMS DO NOT WORK.
+  </p>
+
   <button id="toggleLandscapeBtn">Toggle Landscape</button>
 </div>
 
+<!-- Friends -->
+<div class="section friends-circle" id="friendsCircle">
+  <div class="friend">+Add</div>
+</div>
+
+<!-- Games -->
 <div class="section" id="gamesSection">
-  <h3>Games You Might Like</h3>
-  <button>Steal an Animal</button>
-  <button>Qatari Adventures</button>
-  <button>Desert Racing</button>
+<h3>Games You Might Like</h3>
+<button>Steal an Animal</button>
+<button>Qatari Adventures</button>
+<button>Desert Racing</button>
+<button>Falcon Flight</button>
 </div>
 
+<!-- Videos -->
 <div class="section" id="videosSection">
-  <h3>Videos</h3>
-  <button>Minecraft Tutorial</button>
+<h3>Videos</h3>
+<button>Minecraft Tutorial</button>
+<button>Qatari Games Highlights</button>
+<h3>Short Videos</h3>
+<button>Quick Trick #1</button>
+<button>Epic Fail Clip</button>
 </div>
 
+<!-- Livestreams -->
 <div class="section" id="livestreamsSection">
-  <h3>Livestreams</h3>
-  <button>Live: Desert Racing</button>
+<h3>Livestreams</h3>
+<button>Live: Desert Racing</button>
 </div>
 
+<!-- Chat -->
 <div class="section" id="chatSection">
-  <h3>Chat</h3>
-  <p>No chats yet.</p>
+<h3>Chat</h3>
+<p>No chats yet.</p>
+<input type="text" placeholder="Type a message...">
+<button>Send</button>
 </div>
 
+<!-- Avatar -->
 <div class="section" id="avatarSection">
-  <h3>Avatar</h3>
-  <button>Create / Edit Avatar</button>
+<h3>Avatar</h3>
+<button>Create / Edit Avatar</button>
 </div>
 
+<!-- QR -->
 <div class="section" id="qrSection">
-  <h3>QR Currency</h3>
-  <p id="qrDisplay">0 QR</p>
-  <button data-amount="100">Buy 100 QR</button>
+<h3>QR (Game Currency)</h3>
+<p id="qrDisplay">0 QR</p>
+<button data-amount="40">Buy 40 QR</button>
+<button data-amount="80">Buy 80 QR</button>
+<button data-amount="100">Buy 100 QR</button>
+<button data-amount="450">Buy 450 QR (+Premium)</button>
+<button data-amount="1000">Buy 1000 QR</button>
 </div>
 
+<!-- Premium -->
+<div class="section" id="premiumSection">
+<h3>Premium Options</h3>
+<p>Premium: 2 USD</p>
+<p>Premium + 450 QR: 6.50 USD</p>
+<p>Premium + 10000 QR: 102 USD</p>
+</div>
+
+<!-- Settings -->
 <div class="section" id="settingsSection">
-  <h3>Settings</h3>
-  <p>More settings soon.</p>
+<h3>Settings</h3>
+<p>More settings coming soon.</p>
 </div>
 
+<!-- Support -->
 <div class="section" id="supportSection">
-  <h3>Support</h3>
-  <p>Email: <strong>SleoshrjdH@gmail.com</strong></p>
+<h3>Support</h3>
+<p>Email: <strong>SleoshrjdH@gmail.com</strong></p>
 </div>
 
 </div>
@@ -143,20 +196,29 @@ button { cursor:pointer; }
 </div>
 
 <footer>
-© 2025 Qatar Games
+© 2025 Qatar To Qatar Games by Hamad alkorbi
 </footer>
 
 <script>
-document.querySelectorAll('#sidebar button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-    document.getElementById(btn.dataset.section).style.display='block';
+const quotes = [
+  "Play, Create, Explore!",
+  "Gaming brings people together."
+];
+
+document.getElementById("randomQuote").innerText =
+  quotes[Math.floor(Math.random() * quotes.length)];
+
+document.querySelectorAll('#sidebar button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    const sec = document.getElementById(btn.dataset.section);
+    if (sec) sec.style.display = 'block';
   });
 });
 
-document.getElementById('toggleLandscapeBtn').onclick=()=>{
+document.getElementById('toggleLandscapeBtn').addEventListener('click', () => {
   document.body.classList.toggle('landscape');
-};
+});
 </script>
 
 </body>
