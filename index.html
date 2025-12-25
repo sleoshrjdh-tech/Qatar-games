@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Qatar Games</title>
 
 <style>
@@ -11,74 +11,111 @@ body {
   background:#121212;
   color:white;
   margin:0;
+}
+
+#container {
   display:flex;
-  flex-direction:column;
   min-height:100vh;
 }
 
-#container { display:flex; flex:1; }
-
 #sidebar {
-  width:200px;
+  width:180px;
   background:#000;
   padding:10px;
 }
 
+#sidebar h2 {
+  font-size:18px;
+}
+
 #sidebar button {
   width:100%;
-  margin:5px 0;
-  padding:10px;
+  margin:4px 0;
+  padding:8px;
   background:#111;
   color:white;
   border:none;
+  border-radius:6px;
   cursor:pointer;
 }
 
-#sidebar button:hover { background:#333; }
+#sidebar button:hover {
+  background:#333;
+}
 
-#main { flex:1; padding:10px; overflow-y:auto; }
+#main {
+  flex:1;
+  padding:10px;
+  overflow-x:hidden;
+}
 
 .section {
   display:none;
+  width:92%;
+  margin:10px auto;
+  padding:10px 12px;
   background:#1e1e1e;
-  padding:10px;
-  border-radius:5px;
-  margin-bottom:15px;
+  border-radius:10px;
 }
 
-.notice {
-  background:#7a0000;
-  padding:10px;
-  border-radius:6px;
-  font-size:13px;
-  margin-top:10px;
+.section h3 {
+  font-size:17px;
+  margin-bottom:6px;
 }
 
-.card {
-  background:#222;
-  padding:12px;
-  border-radius:8px;
-  margin-top:15px;
+.section p {
+  font-size:14px;
 }
 
-.game-btn {
-  padding:12px;
-  background:#0a84ff;
-  border:none;
-  border-radius:6px;
+button {
+  background:#333;
   color:white;
-  font-size:16px;
+  border:none;
+  padding:8px 10px;
+  border-radius:6px;
   cursor:pointer;
 }
 
-.game-btn:hover { opacity:0.85; }
+button:hover {
+  background:#555;
+}
 
 footer {
   text-align:center;
-  padding:10px;
+  padding:8px;
   background:#111;
-  color:#888;
   font-size:12px;
+  color:#888;
+}
+
+/* Modal */
+#accountModal {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+
+#accountModalContent {
+  background:#1e1e1e;
+  padding:16px;
+  border-radius:12px;
+  width:90%;
+  max-width:360px;
+}
+
+#accountModalContent input,
+#accountModalContent select {
+  width:100%;
+  padding:8px;
+  margin:6px 0;
+  background:#222;
+  color:white;
+  border:none;
+  border-radius:6px;
 }
 </style>
 </head>
@@ -89,137 +126,192 @@ footer {
 
 <!-- Sidebar -->
 <div id="sidebar">
-  <h3>Menu</h3>
-  <button data-section="start">Start</button>
-  <button data-section="games">Games</button>
-  <button data-section="videos">Videos</button>
-  <button data-section="livestreams">Livestreams</button>
-  <button data-section="chat">Chat</button>
-  <button data-section="avatar">Avatar</button>
-  <button data-section="qr">QR</button>
-  <button data-section="settings">Settings</button>
-  <button data-section="support">Support</button>
+<h2>Menu</h2>
+<button data-section="startSection">Start</button>
+<button data-section="gamesSection">Games</button>
+<button data-section="videosSection">Videos</button>
+<button data-section="chatSection">Chat</button>
+<button data-section="settingsSection">Settings</button>
+<button data-section="supportSection">Support</button>
 </div>
 
 <!-- Main -->
 <div id="main">
 
 <!-- Start -->
-<div class="section" id="start" style="display:block;">
-  <h1>Welcome to Qatar Games</h1>
-  <p id="randomQuote" style="font-style:italic;"></p>
-
-  <div class="notice">
-    ⚠️ <strong>THIS IS NOT AN ONLINE APP.</strong><br>
-    THIS APP IS BEING CREATED.<br>
-    GAMES, VIDEOS, AND LIVESTREAMS DO NOT WORK.
-  </div>
-
-  <div class="card">
-    <h3>🔥 Featured</h3>
-    <p><strong>Qatar Games v1.0</strong></p>
-    <p>Status: <span style="color:gold;">🟡 In Development</span></p>
-    <ul style="padding-left:18px;">
-      <li>✅ App UI created</li>
-      <li>✅ Mini game added</li>
-      <li>⏳ More games</li>
-      <li>⏳ Online features</li>
-    </ul>
-  </div>
+<div class="section" id="startSection" style="display:block;text-align:center;">
+<h3>Welcome to Qatar Games</h3>
+<p id="randomQuote"></p>
+<p style="color:#ffaaaa;font-size:13px;">
+THIS IS NOT AN ONLINE APP. THIS APP IS BEING CREATED.
+</p>
 </div>
 
-<!-- Games -->
-<div class="section" id="games">
-  <h3>🎮 Mini Game</h3>
-
-  <div class="card" style="text-align:center;">
-    <p><strong>Tap Counter Game</strong></p>
-    <p>Score: <span id="score">0</span></p>
-
-    <button class="game-btn" onclick="addScore()">TAP ME</button>
-    <br><br>
-    <button onclick="resetScore()">Reset</button>
-  </div>
+<div class="section" id="gamesSection">
+<h3>Games</h3>
+<p>Games coming soon.</p>
 </div>
 
-<!-- Videos -->
-<div class="section" id="videos">
-  <h3>Videos</h3>
-  <p>Video system not available.</p>
+<div class="section" id="videosSection">
+<h3>Videos</h3>
+<p>Videos coming soon.</p>
 </div>
 
-<!-- Livestreams -->
-<div class="section" id="livestreams">
-  <h3>Livestreams</h3>
-  <p>Livestreams are not supported.</p>
+<div class="section" id="chatSection">
+<h3>Chat</h3>
+<p>Chat coming soon.</p>
 </div>
 
-<!-- Chat -->
-<div class="section" id="chat">
-  <h3>Chat</h3>
-  <p>Chat is offline.</p>
+<!-- SETTINGS -->
+<div class="section" id="settingsSection">
+<h3>Settings</h3>
+<button onclick="toggleMainSettings()">Main</button>
+
+<div id="mainSettings" style="display:none;margin-top:10px;">
+<p><strong>Account username/tag:</strong> <span id="showUsername">-</span></p>
+<p><strong>Password:</strong> ********</p>
+
+<p id="emailBlock">
+<button onclick="addEmail()">Add email</button>
+</p>
+
+<p id="phoneBlock">
+<button onclick="addPhone()">Add phone number</button>
+</p>
+
+<p><strong>Language selection</strong></p>
+<select id="languageSelect" onchange="changeLanguage()">
+<option>English</option>
+<option>French</option>
+<option>Spanish</option>
+<option>German</option>
+<option>Arabic</option>
+<option>Russian</option>
+<option>Turkish</option>
+</select>
+</div>
 </div>
 
-<!-- Avatar -->
-<div class="section" id="avatar">
-  <h3>Avatar</h3>
-  <p>Avatar creator coming later.</p>
-</div>
-
-<!-- QR -->
-<div class="section" id="qr">
-  <h3>QR Currency</h3>
-  <p>QR system is disabled.</p>
-</div>
-
-<!-- Settings -->
-<div class="section" id="settings">
-  <h3>Settings</h3>
-  <p>Settings will be added later.</p>
-</div>
-
-<!-- Support -->
-<div class="section" id="support">
-  <h3>Support</h3>
-  <p>Email: <strong>SleoshrjdH@gmail.com</strong></p>
+<!-- SUPPORT -->
+<div class="section" id="supportSection">
+<h3>Support</h3>
+<p>Email: <strong>SleoshrjdH@gmail.com</strong></p>
+<p>Qatar Games – Prototype</p>
 </div>
 
 </div>
 </div>
 
-<footer>
-© 2025 Qatar Games — Prototype
-</footer>
+<footer>© 2025 Qatar Games</footer>
+
+<!-- ACCOUNT MODAL -->
+<div id="accountModal">
+<div id="accountModalContent">
+<h3>Create Account</h3>
+<input id="newUser" placeholder="Username">
+<input id="newPass" type="password" placeholder="Password">
+<button onclick="createAccount()">Create Account</button>
+
+<hr>
+
+<h3>Log in</h3>
+<input id="loginUser" placeholder="Account / Email / Phone number">
+<input id="loginPass" type="password" placeholder="Password">
+<button onclick="login()">Log in</button>
+
+<hr>
+<button onclick="guest()">Play as Guest</button>
+</div>
+</div>
 
 <script>
-const quotes = [
-  "Play. Create. Explore.",
-  "A future platform in progress.",
-  "Every big app starts small."
-];
+let currentUser = null;
+const users = JSON.parse(localStorage.getItem("users") || "{}");
 
-document.getElementById("randomQuote").innerText =
-  quotes[Math.floor(Math.random() * quotes.length)];
+function saveUsers() {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-document.querySelectorAll("#sidebar button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".section").forEach(sec => sec.style.display="none");
-    document.getElementById(btn.dataset.section).style.display="block";
-  });
+function createAccount() {
+  const u = newUser.value.trim();
+  const p = newPass.value;
+  if (!u || p.length < 4) return alert("Invalid data");
+  if (users[u]) return alert("User exists");
+  users[u] = {password:p, email:null, phone:null, language:"English"};
+  saveUsers();
+  alert("Account created. Log in now.");
+}
+
+function login() {
+  const u = loginUser.value.trim();
+  const p = loginPass.value;
+  for (let name in users) {
+    const user = users[name];
+    if ((name===u || user.email===u || user.phone===u) && user.password===p) {
+      currentUser = name;
+      accountModal.style.display="none";
+      updateSettings();
+      return;
+    }
+  }
+  alert("Login failed");
+}
+
+function guest() {
+  accountModal.style.display="none";
+}
+
+function toggleMainSettings() {
+  mainSettings.style.display =
+    mainSettings.style.display==="none" ? "block" : "none";
+}
+
+function updateSettings() {
+  if (!currentUser) return;
+  showUsername.innerText = currentUser;
+  emailBlock.innerHTML = users[currentUser].email
+    ? "<strong>Email:</strong> ********"
+    : '<button onclick="addEmail()">Add email</button>';
+  phoneBlock.innerHTML = users[currentUser].phone
+    ? "<strong>Phone number:</strong> ********"
+    : '<button onclick="addPhone()">Add phone number</button>';
+  languageSelect.value = users[currentUser].language;
+}
+
+function addEmail() {
+  const e = prompt("Enter email");
+  if (!e) return;
+  users[currentUser].email = e;
+  saveUsers();
+  updateSettings();
+}
+
+function addPhone() {
+  const p = prompt("Enter phone number");
+  if (!p) return;
+  users[currentUser].phone = p;
+  saveUsers();
+  updateSettings();
+}
+
+function changeLanguage() {
+  users[currentUser].language = languageSelect.value;
+  saveUsers();
+}
+
+document.querySelectorAll('#sidebar button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById(btn.dataset.section).style.display='block';
+  }
 });
 
-// MINI GAME LOGIC
-let score = 0;
-
-function addScore() {
-  score++;
-  document.getElementById("score").innerText = score;
-}
-
-function resetScore() {
-  score = 0;
-  document.getElementById("score").innerText = score;
-}
+const quotes = [
+  "Play. Create. Explore.",
+  "Built in Qatar 🇶🇦",
+  "Dream it. Build it."
+];
+randomQuote.innerText = quotes[Math.floor(Math.random()*quotes.length)];
 </script>
 
 </body>
