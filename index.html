@@ -2,316 +2,263 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qatar Games</title>
 
 <style>
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  background:#121212;
-  color:white;
-  margin:0;
-}
-
-#container {
-  display:flex;
-  min-height:100vh;
+  background: #121212;
+  color: white;
+  display: flex;
 }
 
 #sidebar {
-  width:180px;
-  background:#000;
-  padding:10px;
+  width: 200px;
+  background: #000;
+  padding: 10px;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 #sidebar h2 {
-  font-size:18px;
+  text-align: center;
 }
 
 #sidebar button {
-  width:100%;
-  margin:4px 0;
-  padding:8px;
-  background:#111;
-  color:white;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  background: #111;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 #sidebar button:hover {
-  background:#333;
+  background: #333;
 }
 
 #main {
-  flex:1;
-  padding:10px;
-  overflow-x:hidden;
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
 }
 
 .section {
-  display:none;
-  width:92%;
-  margin:10px auto;
-  padding:10px 12px;
-  background:#1e1e1e;
-  border-radius:10px;
+  display: none;
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
-.section h3 {
-  font-size:17px;
-  margin-bottom:6px;
+.friends-circle {
+  display: flex;
+  overflow-x: auto;
 }
 
-.section p {
-  font-size:14px;
+.friend {
+  width: 60px;
+  height: 60px;
+  background: #444;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
-button {
-  background:#333;
-  color:white;
-  border:none;
-  padding:8px 10px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button:hover {
-  background:#555;
+input, select, button {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
 }
 
 footer {
-  text-align:center;
-  padding:8px;
-  background:#111;
-  font-size:12px;
-  color:#888;
-}
-
-/* Modal */
-#accountModal {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-}
-
-#accountModalContent {
-  background:#1e1e1e;
-  padding:16px;
-  border-radius:12px;
-  width:90%;
-  max-width:360px;
-}
-
-#accountModalContent input,
-#accountModalContent select {
-  width:100%;
-  padding:8px;
-  margin:6px 0;
-  background:#222;
-  color:white;
-  border:none;
-  border-radius:6px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="container">
-
-<!-- Sidebar -->
 <div id="sidebar">
-<h2>Menu</h2>
-<button data-section="startSection">Start</button>
-<button data-section="gamesSection">Games</button>
-<button data-section="videosSection">Videos</button>
-<button data-section="chatSection">Chat</button>
-<button data-section="settingsSection">Settings</button>
-<button data-section="supportSection">Support</button>
+  <h2>Menu</h2>
+  <button data-s="start">Start</button>
+  <button data-s="games">Games</button>
+  <button data-s="friends">Friends</button>
+  <button data-s="chat">Chat</button>
+  <button data-s="videos">Videos</button>
+  <button data-s="streams">Livestreams</button>
+  <button data-s="settings">Settings</button>
+  <button data-s="support">Support</button>
 </div>
 
-<!-- Main -->
 <div id="main">
 
-<!-- Start -->
-<div class="section" id="startSection" style="display:block;text-align:center;">
-<h3>Welcome to Qatar Games</h3>
-<p id="randomQuote"></p>
-<p style="color:#ffaaaa;font-size:13px;">
-THIS IS NOT AN ONLINE APP. THIS APP IS BEING CREATED.
-</p>
+<!-- START -->
+<div id="start" class="section">
+  <h1>Welcome to Qatar Games</h1>
+  <p><em>Play. Create. Explore.</em></p>
+  <p style="color:#ffb;">
+    ⚠️ THIS IS NOT AN ONLINE APP.<br>
+    THIS APP IS BEING CREATED.<br>
+    GAMES, VIDEOS & LIVESTREAMS DO NOT WORK.
+  </p>
 </div>
 
-<div class="section" id="gamesSection">
-<h3>Games</h3>
-<p>Games coming soon.</p>
+<!-- GAMES -->
+<div id="games" class="section">
+  <h3>Games</h3>
+  <p>Coming soon…</p>
 </div>
 
-<div class="section" id="videosSection">
-<h3>Videos</h3>
-<p>Videos coming soon.</p>
+<!-- FRIENDS -->
+<div id="friends" class="section">
+  <h3>Friends</h3>
+  <div class="friends-circle" id="friendsList"></div>
+  <input id="friendInput" placeholder="Friend username">
+  <button onclick="addFriend()">Add Friend</button>
 </div>
 
-<div class="section" id="chatSection">
-<h3>Chat</h3>
-<p>Chat coming soon.</p>
+<!-- CHAT -->
+<div id="chat" class="section">
+  <h3>Chat</h3>
+  <p>Offline prototype</p>
+</div>
+
+<!-- VIDEOS -->
+<div id="videos" class="section">
+  <h3>Videos</h3>
+  <p>Coming soon…</p>
+</div>
+
+<!-- STREAMS -->
+<div id="streams" class="section">
+  <h3>Livestreams</h3>
+  <p>Coming soon…</p>
 </div>
 
 <!-- SETTINGS -->
-<div class="section" id="settingsSection">
-<h3>Settings</h3>
-<button onclick="toggleMainSettings()">Main</button>
+<div id="settings" class="section">
+  <h3>Main Settings</h3>
+  <p><b>Username:</b> <span id="sUser">-</span></p>
+  <p><b>Password:</b> ********</p>
 
-<div id="mainSettings" style="display:none;margin-top:10px;">
-<p><strong>Account username/tag:</strong> <span id="showUsername">-</span></p>
-<p><strong>Password:</strong> ********</p>
+  <p id="emailRow"></p>
+  <p id="phoneRow"></p>
 
-<p id="emailBlock">
-<button onclick="addEmail()">Add email</button>
-</p>
-
-<p id="phoneBlock">
-<button onclick="addPhone()">Add phone number</button>
-</p>
-
-<p><strong>Language selection</strong></p>
-<select id="languageSelect" onchange="changeLanguage()">
-<option>English</option>
-<option>French</option>
-<option>Spanish</option>
-<option>German</option>
-<option>Arabic</option>
-<option>Russian</option>
-<option>Turkish</option>
-</select>
-</div>
+  <label>Language</label>
+  <select id="lang">
+    <option>English</option>
+    <option>Arabic</option>
+    <option>French</option>
+    <option>Spanish</option>
+    <option>German</option>
+    <option>Russian</option>
+  </select>
 </div>
 
 <!-- SUPPORT -->
-<div class="section" id="supportSection">
-<h3>Support</h3>
-<p>Email: <strong>SleoshrjdH@gmail.com</strong></p>
-<p>Qatar Games – Prototype</p>
+<div id="support" class="section">
+  <h3>Support</h3>
+  <p>Email: <b>SleoshrjdH@gmail.com</b></p>
 </div>
 
-</div>
+<!-- ACCOUNT -->
+<div class="section" style="display:block">
+  <h3>Create Account</h3>
+  <input id="cUser" placeholder="Username">
+  <input id="cPass" type="password" placeholder="Password">
+  <button onclick="createAccount()">Create</button>
+
+  <h3>Log In</h3>
+  <input id="lUser" placeholder="Account / Email / Phone">
+  <input id="lPass" type="password" placeholder="Password">
+  <button onclick="login()">Log In</button>
 </div>
 
 <footer>© 2025 Qatar Games</footer>
-
-<!-- ACCOUNT MODAL -->
-<div id="accountModal">
-<div id="accountModalContent">
-<h3>Create Account</h3>
-<input id="newUser" placeholder="Username">
-<input id="newPass" type="password" placeholder="Password">
-<button onclick="createAccount()">Create Account</button>
-
-<hr>
-
-<h3>Log in</h3>
-<input id="loginUser" placeholder="Account / Email / Phone number">
-<input id="loginPass" type="password" placeholder="Password">
-<button onclick="login()">Log in</button>
-
-<hr>
-<button onclick="guest()">Play as Guest</button>
-</div>
 </div>
 
 <script>
 let currentUser = null;
-const users = JSON.parse(localStorage.getItem("users") || "{}");
 
-function saveUsers() {
-  localStorage.setItem("users", JSON.stringify(users));
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
+
+document.querySelectorAll('#sidebar button').forEach(b => {
+  b.onclick = () => show(b.dataset.s);
+});
+
+function users() {
+  return JSON.parse(localStorage.getItem('users') || '{}');
+}
+
+function save(u) {
+  localStorage.setItem('users', JSON.stringify(u));
 }
 
 function createAccount() {
-  const u = newUser.value.trim();
-  const p = newPass.value;
-  if (!u || p.length < 4) return alert("Invalid data");
-  if (users[u]) return alert("User exists");
-  users[u] = {password:p, email:null, phone:null, language:"English"};
-  saveUsers();
-  alert("Account created. Log in now.");
+  let u = users();
+  let name = cUser.value.trim();
+  let pass = cPass.value;
+  if (!name || pass.length < 6) return alert("Invalid");
+  if (u[name]) return alert("Taken");
+  u[name] = { pass, friends: [], email:null, phone:null };
+  save(u);
+  alert("Account created");
 }
 
 function login() {
-  const u = loginUser.value.trim();
-  const p = loginPass.value;
-  for (let name in users) {
-    const user = users[name];
-    if ((name===u || user.email===u || user.phone===u) && user.password===p) {
-      currentUser = name;
-      accountModal.style.display="none";
-      updateSettings();
-      return;
-    }
-  }
-  alert("Login failed");
+  let u = users();
+  let name = lUser.value.trim();
+  if (u[name] && u[name].pass === lPass.value) {
+    currentUser = name;
+    sUser.innerText = name;
+    loadFriends();
+    updateSettings();
+    show('start');
+  } else alert("Wrong login");
 }
 
-function guest() {
-  accountModal.style.display="none";
+function addFriend() {
+  if (!currentUser) return;
+  let u = users();
+  let f = friendInput.value.trim();
+  if (!u[f]) return alert("User not found");
+  if (!u[currentUser].friends.includes(f))
+    u[currentUser].friends.push(f);
+  save(u);
+  loadFriends();
 }
 
-function toggleMainSettings() {
-  mainSettings.style.display =
-    mainSettings.style.display==="none" ? "block" : "none";
+function loadFriends() {
+  let u = users();
+  friendsList.innerHTML = "";
+  u[currentUser].friends.forEach(f => {
+    let d = document.createElement("div");
+    d.className = "friend";
+    d.innerText = f;
+    friendsList.appendChild(d);
+  });
 }
 
 function updateSettings() {
-  if (!currentUser) return;
-  showUsername.innerText = currentUser;
-  emailBlock.innerHTML = users[currentUser].email
-    ? "<strong>Email:</strong> ********"
-    : '<button onclick="addEmail()">Add email</button>';
-  phoneBlock.innerHTML = users[currentUser].phone
-    ? "<strong>Phone number:</strong> ********"
-    : '<button onclick="addPhone()">Add phone number</button>';
-  languageSelect.value = users[currentUser].language;
+  let u = users()[currentUser];
+  emailRow.innerHTML = u.email ? "Email: ********" : "<button>Add Email</button>";
+  phoneRow.innerHTML = u.phone ? "Phone: ********" : "<button>Add Phone</button>";
 }
-
-function addEmail() {
-  const e = prompt("Enter email");
-  if (!e) return;
-  users[currentUser].email = e;
-  saveUsers();
-  updateSettings();
-}
-
-function addPhone() {
-  const p = prompt("Enter phone number");
-  if (!p) return;
-  users[currentUser].phone = p;
-  saveUsers();
-  updateSettings();
-}
-
-function changeLanguage() {
-  users[currentUser].language = languageSelect.value;
-  saveUsers();
-}
-
-document.querySelectorAll('#sidebar button').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-    document.getElementById(btn.dataset.section).style.display='block';
-  }
-});
-
-const quotes = [
-  "Play. Create. Explore.",
-  "Built in Qatar 🇶🇦",
-  "Dream it. Build it."
-];
-randomQuote.innerText = quotes[Math.floor(Math.random()*quotes.length)];
 </script>
 
 </body>
